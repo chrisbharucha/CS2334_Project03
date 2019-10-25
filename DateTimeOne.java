@@ -1,7 +1,9 @@
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.TimeZone;
@@ -13,6 +15,7 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	private static final int ARRAY_SIZE = 10;
 	private static final int MILLI_CONSTANT = 1000;
 	Calendar calendar; //calendar used for data
+	Date today;
 	HashMap<String, String> map;
 	
 	
@@ -23,8 +26,16 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	}
 	
 	public int getValueOfSecond() {
-		//using the milli conversion factor to get time in seconds
-		return (int)(System.currentTimeMillis() / MILLI_CONSTANT);
+		//using the milli conversion factor to get time in seconds as a long
+		long sec = (System.currentTimeMillis() / MILLI_CONSTANT);
+		
+		/* finding the current second by taking the long and finding its remainder of 60 (this is
+		 * also the return value)
+		 */
+		int currentSec = (int)(sec % 60);
+		
+		System.out.println("The value of Second now: " + currentSec);
+		return currentSec;
 	}
 	
 	public void sleepForFiveSec() {
@@ -45,38 +56,35 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	public void dateTimeOfOtherCity() {
 		//format for the hour output is as follows:
 		SimpleDateFormat hourFormat = new SimpleDateFormat("k:mm");
+		today = new Date();
 		
-		//getting the time zones for the GMT, BST, and CST time zones
-		TimeZone GMT = TimeZone.getTimeZone("GMT");
-		TimeZone BST = TimeZone.getTimeZone("BST");
-		TimeZone CST = TimeZone.getTimeZone("CST");
+		//printing out default TimeZone
+		System.out.println("Time on Server: " + hourFormat.format(today));
 		
-		//creating calendars for the time zones
-		Calendar gmt = Calendar.getInstance(GMT);
-		Calendar bst = Calendar.getInstance(BST);
-		Calendar cst = Calendar.getInstance(CST);
+		//changing to GMT TimeZone and printing
+		hourFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+		System.out.println("GMT: " + hourFormat.format(today));
 		
-		//printing out in the right format
-		System.out.println("Time on Server: " + hourFormat.format(calendar.getTime()));
-		System.out.println("GMT: " + hourFormat.format(gmt.getTime()));
-		System.out.println("BST (90E): " + hourFormat.format(bst.getTime()));
-		System.out.println("CST (90W): " + hourFormat.format(cst.getTime()));
+		//changing to BST TimeZone and printing
+		hourFormat.setTimeZone(TimeZone.getTimeZone("BST"));
+		System.out.println("BST (90E): " + hourFormat.format(today));
+		
+		//changing to CST TimeZone and printing
+		hourFormat.setTimeZone(TimeZone.getTimeZone("CST"));
+		System.out.println("CST (90W): " + hourFormat.format(today));
 	}
 	
 	public void dateTimeDifferentZone() {
 		//format for the date output of other timeZone is as follows:
 		SimpleDateFormat zoneDateFormat = new SimpleDateFormat("MM/dd/yyyy k:mm");
 		
-		//getting the time zones for the GMT, BST, and CST time zones
-		TimeZone GMT = TimeZone.getTimeZone("GMT");
-		TimeZone BST = TimeZone.getTimeZone("BST");
-		TimeZone CST = TimeZone.getTimeZone("CST");
-				
 		//creating calendars for the time zones
-		Calendar gmt = Calendar.getInstance(GMT);
-		Calendar bst = Calendar.getInstance(BST);
-		Calendar cst = Calendar.getInstance(CST);
+		Calendar gmt = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+		Calendar bst = Calendar.getInstance(TimeZone.getTimeZone("GMT+6"));
+		Calendar cst = Calendar.getInstance(TimeZone.getTimeZone("GMT-6"));
 		
+		//Date today = new Date();
+				
 		//Getting the String representations of the date to store in HashMap
 		String gmtValue = zoneDateFormat.format(gmt.getTime());
 		String bstValue = zoneDateFormat.format(bst.getTime());
