@@ -2,28 +2,33 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
+import java.util.TreeMap;
 
 
 public class DateTimeOne extends MesoDateTimeOneAbstract
 {
 
-	private static final int ARRAY_SIZE = 10;
 	private static final int MILLI_CONSTANT = 1000;
 	Calendar calendar; //calendar used for data
 	Date today; //date used for different TimeZones
 	HashMap<String, String> map;
+	HashMap<String, String> noZoneMap;
 	
 	
 	public DateTimeOne() {
 		//initializing the calendar and HashMap
-		calendar = new GregorianCalendar();
+		calendar = Calendar.getInstance();
 		today = new Date();
-		map = new HashMap<String, String>();
+		map = new HashMap<>();
+		noZoneMap = new HashMap<>();
 	}
 	
 	public int getValueOfSecond() {
@@ -88,13 +93,13 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 		zoneDateFormat.setTimeZone(TimeZone.getTimeZone("BST"));
 		String bstValue = zoneDateFormat.format(today);
 		map.put("BST", bstValue);
-		System.out.println("BST (90E): " + zoneDateFormat.format(today));
+		System.out.println("BST: " + zoneDateFormat.format(today));
 				
 		//changing to CST TimeZone, adding to HashMap and printing
 		zoneDateFormat.setTimeZone(TimeZone.getTimeZone("CST"));
 		String cstValue = zoneDateFormat.format(today);
 		map.put("CST", cstValue);
-		System.out.println("CST (90W): " + zoneDateFormat.format(today));
+		System.out.println("CST: " + zoneDateFormat.format(today));
 	}
 	
 	public void timeZoneHashMap() {
@@ -102,20 +107,17 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 		map.put("ZST", "11/05/2018 19:59");
 		map.put("AST", "10/01/2020 19:59");
 		
-		//declaring a new HashMap
-		HashMap<String,String> noZoneMap = new HashMap<String,String>();
-		
 		/* adding the contents of the first HashMap to the new one, using the values from first HashMap
 		 * as the keys for the new HashMap
 		 */
-		noZoneMap.put(map.get("GMT"), map.get("GMT"));
-		noZoneMap.put(map.get("BST"), map.get("BST"));
-		noZoneMap.put(map.get("CST"), map.get("CST"));
-		noZoneMap.put(map.get("ZST"), map.get("ZST"));
-		noZoneMap.put(map.get("AST"), map.get("AST"));
+		noZoneMap.put(map.get("GMT"), "");
+		noZoneMap.put(map.get("BST"), "");
+		noZoneMap.put(map.get("CST"), "");
+		noZoneMap.put(map.get("ZST"), "");
+		noZoneMap.put(map.get("AST"), "");
 		
 		//declaring an array to store the values of the first HashMap
-		LocalDateTime[] array = new LocalDateTime[ARRAY_SIZE];
+		LocalDateTime[] array = new LocalDateTime[map.size()];
 		
 		//creating a format to use for converting String to LocalDateTime objects
 		DateTimeFormatter arrFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy k:mm");
@@ -133,28 +135,27 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 		array[2] = cstLDT;
 		array[3] = zstLDT;
 		array[4] = astLDT;
-
-
+		
+		//creating a sortedMap using the keys in map HashMap
+		TreeMap<String, String> sortedMap = new TreeMap<>(map);
 		
 		System.out.println("Print Style 1:");
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
+		for (String date : sortedMap.keySet()) {
+			System.out.println(date + " " + sortedMap.get(date));
+		}
 		
+		//creating a sortedNoZoneMap using the keys in noZoneMap HashMap
+		TreeMap<String, String> sortedNoZoneMap = new TreeMap<>(noZoneMap);
 		System.out.println("Print Style 3:");
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
+		for (String date : sortedNoZoneMap.keySet()) {
+			System.out.println(date + " " + sortedNoZoneMap.get(date));
+		}
 		
-		System.out.println("Print Style 5:");
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
+		//sorting the array contents in descending order
+		Arrays.sort(array, Collections.reverseOrder());
+		System.out.println("Print Style 5: Final sorted Array:");
+		for (int i = 0; i < array.length; ++i) {
+			System.out.println(array[i]);
+		}
 	}
 }
