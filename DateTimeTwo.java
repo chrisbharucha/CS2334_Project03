@@ -7,6 +7,7 @@ import java.time.Period;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class DateTimeTwo {
 	
@@ -90,10 +91,16 @@ public class DateTimeTwo {
 	}
 	
 	public void dateHashMap() {
-		
+		for (LocalDate i : map.keySet()) {
+			System.out.println(i.toString() + ":" + map.get(i));
+		}
 	}
 	
 	public void dateHashMapSorted() {
-		
+		//sorting the HashMap sorts the LocalDate times in ascending order this time
+		TreeMap<LocalDate, Integer> sortedMap = new TreeMap<>(map);
+		for (LocalDate i : sortedMap.keySet()) {
+			System.out.println(i.toString() + ":" + sortedMap.get(i));
+		}
 	}
 }
