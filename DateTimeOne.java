@@ -1,4 +1,4 @@
-import java.text.DateFormat;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -6,9 +6,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.TimeZone;
 import java.util.TreeMap;
 
@@ -16,15 +14,15 @@ import java.util.TreeMap;
 public class DateTimeOne extends MesoDateTimeOneAbstract
 {
 
-	private static final int MILLI_CONSTANT = 1000;
-	Calendar calendar; //calendar used for data
-	Date today; //date used for different TimeZones
-	HashMap<String, String> map;
-	HashMap<String, String> noZoneMap;
+	private static final int MILLI_CONSTANT = 1000; //used for converting milli to seconds
+	private Calendar calendar; //calendar used for data
+	private Date today; //date used for different TimeZones
+	private HashMap<String, String> map; //first HashMap that uses TimeZone ID's as keys
+	private HashMap<String, String> noZoneMap; //second HashMap that uses map's values as keys
 	
 	
 	public DateTimeOne() {
-		//initializing the calendar and HashMap
+		//initializing the local private variables
 		calendar = Calendar.getInstance();
 		today = new Date();
 		map = new HashMap<>();
