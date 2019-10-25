@@ -1,12 +1,16 @@
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class DateTimeOne extends MesoDateTimeOneAbstract
 {
 
 	private static final int MILLI_CONSTANT = 1000;
-
+	Calendar calendar; //calendar used for data
 	
 	public DateTimeOne() {
-		
+		//initializing the calendar
+		calendar = new GregorianCalendar();
 	}
 	
 	public int getValueOfSecond() {
@@ -23,7 +27,9 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	}
 	
 	public void dateTimeNow() {
-		
+		//format for the output is as follows:
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy hh:mm a");
+		System.out.println("Current Date/Time: " + dateFormat.format(calendar.getTime()));
 	}
 	
 	
