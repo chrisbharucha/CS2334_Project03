@@ -1,4 +1,6 @@
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -8,6 +10,7 @@ import java.util.TimeZone;
 public class DateTimeOne extends MesoDateTimeOneAbstract
 {
 
+	private static final int ARRAY_SIZE = 10;
 	private static final int MILLI_CONSTANT = 1000;
 	Calendar calendar; //calendar used for data
 	HashMap<String, String> map;
@@ -20,7 +23,8 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	}
 	
 	public int getValueOfSecond() {
-	return (int)(System.currentTimeMillis() / MILLI_CONSTANT);
+		//using the milli conversion factor to get time in seconds
+		return (int)(System.currentTimeMillis() / MILLI_CONSTANT);
 	}
 	
 	public void sleepForFiveSec() {
@@ -90,6 +94,63 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	}
 	
 	public void timeZoneHashMap() {
+		//adding two new time zones and their dates to the first HashMap
+		map.put("ZST", "11/05/2018 19:59");
+		map.put("AST", "10/01/2020 19:59");
 		
+		//declaring a new HashMap
+		HashMap<String,String> noZoneMap = new HashMap<String,String>();
+		
+		/* adding the contents of the first HashMap to the new one, using the values from first HashMap
+		 * as the keys for the new HashMap
+		 */
+		noZoneMap.put(map.get("GMT"), map.get("GMT"));
+		noZoneMap.put(map.get("BST"), map.get("BST"));
+		noZoneMap.put(map.get("CST"), map.get("CST"));
+		noZoneMap.put(map.get("ZST"), map.get("ZST"));
+		noZoneMap.put(map.get("AST"), map.get("AST"));
+		
+		//declaring an array to store the values of the first HashMap
+		LocalDateTime[] array = new LocalDateTime[ARRAY_SIZE];
+		
+		//creating a format to use for converting String to LocalDateTime objects
+		DateTimeFormatter arrFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy k:mm");
+		
+		//creating the LocalDateTime objects
+		LocalDateTime gmtLDT = LocalDateTime.parse(map.get("GMT"), arrFormat);
+		LocalDateTime bstLDT = LocalDateTime.parse(map.get("BST"), arrFormat);
+		LocalDateTime cstLDT = LocalDateTime.parse(map.get("CST"), arrFormat);
+		LocalDateTime zstLDT = LocalDateTime.parse(map.get("ZST"), arrFormat);
+		LocalDateTime astLDT = LocalDateTime.parse(map.get("AST"), arrFormat);
+		
+		//adding the LocalDateTime objects to the array
+		array[0] = gmtLDT;
+		array[1] = bstLDT;
+		array[2] = cstLDT;
+		array[3] = zstLDT;
+		array[4] = astLDT;
+
+
+		
+		System.out.println("Print Style 1:");
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		
+		System.out.println("Print Style 3:");
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		
+		System.out.println("Print Style 5:");
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
 	}
 }
