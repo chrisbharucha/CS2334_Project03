@@ -42,12 +42,12 @@ public class Main
 		 * and will print as, "The value of Second now: 58"
 		 * Remember, this is the format only, value should be the current time.
 		 */
-		int vlaueOfSecondNow = dateTimeOne.getValueOfSecond();
+		int valueOfSecondNow = dateTimeOne.getValueOfSecond();
 		/**
 		 * If vlaueOfSecondNow>55, program will sleep for 5 seconds.
 		 */		
 		
-		if(vlaueOfSecondNow > allowedValueForSecond)
+		if(valueOfSecondNow > allowedValueForSecond)
 		{
 			dateTimeOne.sleepForFiveSec();
 		}
@@ -126,7 +126,7 @@ public class Main
 		 */
 	    dateTimeOne.timeZoneHashMap();
 	    
-	    System.out.println("\n");
+	    System.out.println("\n");	    
 	    DateTimeTwo dateTimeTwo = new DateTimeTwo();
 	    /**
 		 * Section 2
@@ -176,7 +176,7 @@ public class Main
 		 */
 	    dateTimeTwo.compareYear();
 	    System.out.println("\n");	    
-	    
+
 	    /**
 		 * Now print out your Hashmap. It may look like (This is the format, I didn't print whole map.
 		 * Key:value
@@ -197,7 +197,7 @@ public class Main
 		 */
 	    dateTimeTwo.dateHashMapSorted();
 	    System.out.println("\nSorted map:");	    
-	    
+
 	    /**
 		 * Section 3
 		 * For details first see the PDF Section 3 Extension
@@ -217,7 +217,7 @@ public class Main
 		 * Output: 79
 		 */
 		System.out.println(asciiVal.get(stId));		
-		
+
 		MesoEquivalent mesoEqual = new MesoEquivalent(stId);		
 	    /**
 		 * Print the content of the hashmap

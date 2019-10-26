@@ -136,7 +136,6 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 		
 		//creating a sortedMap using the keys in map HashMap
 		TreeMap<String, String> sortedMap = new TreeMap<>(map);
-		
 		System.out.println("Print Style 1:");
 		for (String date : sortedMap.keySet()) {
 			System.out.println(date + " " + sortedMap.get(date));
