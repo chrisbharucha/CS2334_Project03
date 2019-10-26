@@ -28,7 +28,7 @@ public class MesoEquivalent {
 		//first line of actual data
 		String dataLine = br.readLine();
 		
-		while (br.ready()) {
+		while (dataLine != null) {
 			String info = dataLine.split("\\s+")[1]; //we want the first index because [0] is a whitespace
 			stArray.add(info); //add it to the ArrayList
 			dataLine = br.readLine();

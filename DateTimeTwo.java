@@ -65,7 +65,7 @@ public class DateTimeTwo {
 		String dataLine = br.readLine();
 		Integer value = 1;
 		
-		while (br.ready()) {
+		while (dataLine != null) {
 			LocalDate dataLineLDT = LocalDate.parse(dataLine, format);
 			map.put(dataLineLDT, value++);
 			dataLine = br.readLine();
