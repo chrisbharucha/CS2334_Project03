@@ -60,18 +60,23 @@ public class MesoEquivalent {
 				mapID.put(stArray.get(index), stIDAvg);
 			}
 		}
+		return mapID;
+	}
+	
+	@Override
+	public String toString() {
 		int i = 0;
-		System.out.print("{");
+		String result = "{";
 		for (String stIDs : mapID.keySet()) {
 			if (i++ == mapID.size() - 1) {
-				System.out.print(stIDs + "=" + mapID.get(stIDs));
+				result += (stIDs + "=" + mapID.get(stIDs));
 			}
 			else {
-				System.out.print(stIDs + "=" + mapID.get(stIDs) + ", ");
+				result += (stIDs + "=" + mapID.get(stIDs) + ", ");
 			}
 		}
-		System.out.print("}");
-		return mapID;
+		result += "}";
+		return result;
 	}
 	
 }

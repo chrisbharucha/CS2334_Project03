@@ -241,6 +241,49 @@ public class Main
 		//System.out.print("##");
 		System.out.println("\nThe sorted map:");
 		new MesoLexicographical(asciiVal);		
-		
+
+		/**
+		 * Section 4
+		 *   
+		 * For this section read the file, SortingDates.txt
+		 * Parse the file and store in a hashmap. The dates as the key and as a date format, not string
+		 * For example, HashMap<LocalDate, Integer>, but you can use any date function
+		 * format of the date will be: 2020-12-31
+		 * 
+		 * For this section, you have to sort using an algorithm (such as Quick sort, Bubble sort etc.)
+		 * Don't use any built-in function or other methods/map/list etc., you have to implement the algorithm
+		 * You are free to choose any algorithm you prefer to implement such as Quick sort, Bubble
+		 * sort, Radix sort, Insertion sort etc.
+		 */
+		System.out.println("\nFinally, the dates in HashMap are sorted using algorithm:\n");
+	    DateSortingUsingAlgorithm dateSortingUsingAlgorithm = new DateSortingUsingAlgorithm();	    
+	    
+	    /**
+		 * Sort the hashmap in descending order
+		 * Output will be like:
+		 * 2026-05-06
+		 * 2021-03-31
+		 * 2020-12-31
+		 */
+	    System.out.println("Sorting of the dates in descending order:");
+	    long startTime = System.nanoTime();  
+	    dateSortingUsingAlgorithm.dateHashMapSortedDescending();
+	    long estimatedTime = System.nanoTime() - startTime;
+	    
+	    /**
+		 * Sort the hashmap in ascending order.		 * 
+		 * Output will be like:
+		 * 2011-03-15
+		 * 2012-10-10
+		 * 2014-02-28
+		 */
+	    System.out.println("Sorting of the dates in ascending order:");
+	    long startTime2 = System.nanoTime();  
+	    dateSortingUsingAlgorithm.dateHashMapSorted();
+	    long estimatedTime2 = System.nanoTime() - startTime2;
+	    
+	    System.out.println("\nExecution time for case 1: " + estimatedTime);
+	    System.out.println("Execution time for case 2: " + estimatedTime2);
+	    //You can see the difference in two execution times, why? explain in your documentation.
 	}
 }
