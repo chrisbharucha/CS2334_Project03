@@ -4,7 +4,6 @@ public class MesoAsciiCal extends MesoAsciiAbstract
 	private static final int NUM_LETTERS = 26; //number of letters in alphabet
 	private int[] ascii = new int[NUM_LETTERS]; //array that contains the ASCII values of letters
 	private char[] letters; //array that contains all of the letters
-	public static int average;
 	private String stID; //the station ID that all the calculations will be done on
 	
 	public MesoAsciiCal(MesoStation stID) {
@@ -19,6 +18,9 @@ public class MesoAsciiCal extends MesoAsciiAbstract
    }
    
    public int calAverage() {
+	   int nrmnAvg = 79; //the asciiAverage for Norman
+	   int avg1;
+	   
 	   char c1 = stID.charAt(0);
 	   char c2 = stID.charAt(1);
 	   char c3 = stID.charAt(2);
@@ -42,16 +44,25 @@ public class MesoAsciiCal extends MesoAsciiAbstract
 		   }
 		}
 	   double avg = (ascii1 + ascii2 + ascii3 + ascii4) / 4.0; //using 4.0 so that the ASCII values get casted to a double
+	   
 	   /*
-		* testing whether the decimal is less than or greater than 0.5 in order to apply the correct function
+		* testing whether the decimal is less than or greater than 0.25 in order to apply the correct function
 		*/
 	   if ((avg - (int)avg) >= 0.25) {	
-		   average = (int)Math.ceil(avg);
-		   return average;
+		   avg1 = (int)Math.ceil(avg);
 	   }
 	   else {
-		   average = (int)Math.floor(avg);
-		   return average;
+		   avg1 = (int)Math.floor(avg);
+	   }
+	   
+	   //the average of the two averages
+	   double finalAvg = ((avg1 + nrmnAvg) / 2.0);
+	   
+	   if ((finalAvg - (int)finalAvg) >= 0.25) {
+		   return (int)Math.ceil(finalAvg);
+	   }
+	   else {
+		   return (int)Math.floor(finalAvg);
 	   }
    }
 }

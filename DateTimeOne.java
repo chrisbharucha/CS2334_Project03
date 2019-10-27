@@ -44,7 +44,7 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	
 	public void sleepForFiveSec() {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(5000); //5000 milliseconds is 5 seconds
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			System.out.println("me no wanna go sleep");
