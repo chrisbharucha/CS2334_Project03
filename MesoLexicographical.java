@@ -4,21 +4,17 @@ import java.util.TreeMap;
 
 public class MesoLexicographical extends MesoSortedAbstract
 {
-	private Map<String, Integer> unsorted;
+	protected Map<String, Integer> notSorted;
 	
 	public MesoLexicographical(HashMap<String, Integer> unsorted) {
-		//Initializing the classes local variables
-		this.unsorted = sortedMap(unsorted);
+		this.notSorted = sortedMap(unsorted); //method call returns a sorted HashMap
 	}
 	
 	public Map<String, Integer> sortedMap(HashMap<String, Integer> unsorted){
-		//using TreeMap to sort
-		TreeMap<String, Integer> sortedMap = new TreeMap<>(unsorted);
-		int i = 0;
-		for (String key : sortedMap.keySet()) {
-			unsorted.put(key, i++);
+		TreeMap<String, Integer> sorted = new TreeMap<String, Integer>(unsorted);
+		for (String key : sorted.keySet()) {
 			System.out.println(key);
 		}
-		return unsorted;
+		return sorted;
 	}
 }
